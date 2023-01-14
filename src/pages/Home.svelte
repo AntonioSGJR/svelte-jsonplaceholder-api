@@ -21,7 +21,7 @@
 
   <div class="card-wrapper">
     {#each $albumsState as album}
-      <a href="album/{album.id}" class="card">{album.title}</a>
+      <a href="albuns/{album.id}" class="card">{album.title}</a>
     {/each}
   </div>
 </div>
@@ -44,8 +44,12 @@
     width: 20%;
     height: 200px;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    color: #444;
 
-    box-shadow: 1px 2px rgba(0,0,0,.25)
+    border-radius: 6px;
   }
 </style>
