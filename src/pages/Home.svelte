@@ -1,15 +1,51 @@
 <script>
-  import {onMount} from 'svelte'  
+  import { onMount } from 'svelte'  
+  import { writable } from 'svelte/store';
 
+  let albumsState = writable([])
 
   onMount(() => {
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Bourbon")
+    fetch("https://jsonplaceholder.typicode.com/albums/")
     .then(response => response.json())
-    .then(data => {
-      console.log(data);
+    .then(albums => {
+      albumsState.set(albums)
     }).catch(error => {
       console.log(error);
       return [];
     });
   })
 </script>
+
+<div class="home">
+  <h1>Albums</h1>
+
+  <div class="card-wrapper">
+    {#each $albumsState as album}
+      <a href="album/{album.id}" class="card">{album.title}</a>
+    {/each}
+  </div>
+</div>
+
+<style>
+  .home {
+    padding: 1em;
+  }
+
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+    row-gap: 1em;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    width: 20%;
+    height: 200px;
+
+
+
+    box-shadow: 1px 2px rgba(0,0,0,.25)
+  }
+</style>
